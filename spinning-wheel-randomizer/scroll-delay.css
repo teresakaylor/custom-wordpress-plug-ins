@@ -1,61 +1,32 @@
-<a href="#voting-form" class="floating-btn vote-now">VOTE NOW</a>
+document.addEventListener("DOMContentLoaded", function () {
+    let spinabot = document.querySelector('.wp-block-button__link[href*="spin-a-bot"]');
+    let chatNow = document.querySelector('#chat-now');
 
-<button class="floating-btn hamburger-menu" aria-label="Open Navigation Menu">
-  <span class="line"></span>
-  <span class="line"></span>
-  <span class="line"></span>
-</button>
+    if (!spinabot) return; // If the Spin-a-Bot button doesn't exist, do nothing
 
+    function checkScroll() {
+        let scrollY = window.scrollY + window.innerHeight;
 
-<style>
-/* 1. Basic Floating Button Styles */
-.floating-btn {
-  position: fixed; /* Key property: keeps it in the viewport */
-  top: 20px;       /* 20px from the top of the screen */
-  z-index: 1000;   /* Ensures it stays above all other content */
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds depth */
-}
+        // If #chat-now exists, only show Spin-a-Bot 10% further past its position
+        if (chatNow) {
+            let chatNowPosition = chatNow.getBoundingClientRect().top + window.scrollY;
+            let pageHeight = document.documentElement.scrollHeight;
 
-/* 2. Style for the "VOTE NOW" Button (Top-Left) */
-.vote-now {
-  left: 20px; /* New: Positions it 20px from the LEFT side */
-  
-  background-color: #ff4500; /* Bright, attention-grabbing color */
-  color: white;
-  padding: 12px 24px;
-  border-radius: 50px; /* Pill shape */
-  text-decoration: none;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: background-color 0.3s;
-}
+            // Push the reveal trigger to 10% further down
+            let chatNowTrigger = chatNowPosition + (pageHeight * 0.1);
 
-.vote-now:hover {
-  background-color: #e63900;
-}
+            if (scrollY > chatNowTrigger) {
+                spinabot.style.display = "block";
+            }
+        } 
+        // If #chat-now is NOT on the page, fallback to 50% scroll rule
+        else {
+            let pageHeight = document.documentElement.scrollHeight;
+            if (scrollY > pageHeight / 2) {
+                spinabot.style.display = "block";
+            }
+        }
+    }
 
-/* 3. Style for the Hamburger Menu Button (Top-Right) */
-.hamburger-menu {
-  right: 20px; /* New: Positions it 20px from the RIGHT side */
-  
-  width: 50px;
-  height: 50px;
-  border: none;
-  background-color: #333; /* Dark background */
-  border-radius: 50%; /* Circle shape */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
-}
-
-.hamburger-menu .line {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background-color: white;
-  transition: all 0.3s;
-}
-</style>
+    window.addEventListener("scroll", checkScroll);
+});
