@@ -1,0 +1,61 @@
+<a href="#voting-form" class="floating-btn vote-now">VOTE NOW</a>
+
+<button class="floating-btn hamburger-menu" aria-label="Open Navigation Menu">
+  <span class="line"></span>
+  <span class="line"></span>
+  <span class="line"></span>
+</button>
+
+
+<style>
+/* 1. Basic Floating Button Styles */
+.floating-btn {
+  position: fixed; /* Key property: keeps it in the viewport */
+  top: 20px;       /* 20px from the top of the screen */
+  z-index: 1000;   /* Ensures it stays above all other content */
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds depth */
+}
+
+/* 2. Style for the "VOTE NOW" Button (Top-Left) */
+.vote-now {
+  left: 20px; /* New: Positions it 20px from the LEFT side */
+  
+  background-color: #ff4500; /* Bright, attention-grabbing color */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px; /* Pill shape */
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.vote-now:hover {
+  background-color: #e63900;
+}
+
+/* 3. Style for the Hamburger Menu Button (Top-Right) */
+.hamburger-menu {
+  right: 20px; /* New: Positions it 20px from the RIGHT side */
+  
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: #333; /* Dark background */
+  border-radius: 50%; /* Circle shape */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.hamburger-menu .line {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s;
+}
+</style>
