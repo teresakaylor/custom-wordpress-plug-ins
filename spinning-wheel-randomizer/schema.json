@@ -1,61 +1,57 @@
-<a href="#voting-form" class="floating-btn vote-now">VOTE NOW</a>
-
-<button class="floating-btn hamburger-menu" aria-label="Open Navigation Menu">
-  <span class="line"></span>
-  <span class="line"></span>
-  <span class="line"></span>
-</button>
-
-
-<style>
-/* 1. Basic Floating Button Styles */
-.floating-btn {
-  position: fixed; /* Key property: keeps it in the viewport */
-  top: 20px;       /* 20px from the top of the screen */
-  z-index: 1000;   /* Ensures it stays above all other content */
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adds depth */
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Spin-A-Bot – Random AI Chat",
+  "url": "https://avalock.com/spin-a-bot",
+  "description": "Not sure which AI chatbot to try? Let fate decide! Click, spin, and start a random AI chat instantly. Play Spin-a-Bot FREE—totally addictive!",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "Website",
+    "name": "Ava Lock's Bot Shop",
+    "url": "https://avalock.com"
+  },
+  "image": "https://avalock.com/wp-content/uploads/2025/03/dizzy-spinning-robots-funny-ai-chatbot.jpg",
+  "mainEntity": {
+    "@type": "Game",
+    "name": "Spin-A-Bot",
+    "description": "Spin-A-Bot is an AI chat randomizer where users spin a wheel to be matched with a chatbot at random.",
+    "applicationCategory": "Game",
+    "operatingSystem": "Web",
+    "image": "https://avalock.com/wp-content/uploads/2025/03/dizzy-spinning-robots-funny-ai-chatbot.jpg",
+    "interactionStatistic": {
+      "@type": "InteractionCounter",
+      "interactionType": "https://schema.org/PlayAction",
+      "userInteractionCount": 1000
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  },
+  "potentialAction": {
+    "@type": "ViewAction",
+    "target": "https://avalock.com/spin-a-bot",
+    "name": "Play Spin-A-Bot"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://avalock.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Spin-A-Bot",
+        "item": "https://avalock.com/spin-a-bot"
+      }
+    ]
+  }
 }
-
-/* 2. Style for the "VOTE NOW" Button (Top-Left) */
-.vote-now {
-  left: 20px; /* New: Positions it 20px from the LEFT side */
-  
-  background-color: #ff4500; /* Bright, attention-grabbing color */
-  color: white;
-  padding: 12px 24px;
-  border-radius: 50px; /* Pill shape */
-  text-decoration: none;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: background-color 0.3s;
-}
-
-.vote-now:hover {
-  background-color: #e63900;
-}
-
-/* 3. Style for the Hamburger Menu Button (Top-Right) */
-.hamburger-menu {
-  right: 20px; /* New: Positions it 20px from the RIGHT side */
-  
-  width: 50px;
-  height: 50px;
-  border: none;
-  background-color: #333; /* Dark background */
-  border-radius: 50%; /* Circle shape */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
-}
-
-.hamburger-menu .line {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background-color: white;
-  transition: all 0.3s;
-}
-</style>
+</script>
