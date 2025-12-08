@@ -1,12 +1,19 @@
 <?php
 /**
- * possible_rewrite_cdn_urls()
- * MANDATE: Route media through the BunnyCDN Pull Zone for low latency.
+ * possible_rewrite_cdn_urls() - FINAL STABLE VERSION
+ * MANDATE: Route media through BunnyCDN & prevent crash on Schema array input.
  * PHP 8.4 Compatible.
  */
-function possible_rewrite_cdn_urls( $content ) {
+// FIX: Set $content = '' to make the argument optional, and allow array/object input
+function possible_rewrite_cdn_urls( $content = '' ) { 
+ 
+    // CRITICAL: Only run str_replace if the input is confirmed to be a STRING (HTML, post content, text widget).
+    // This prevents the fatal crash when Rank Math passes an ARRAY/OBJECT (Schema data).
+    if ( ! is_string( $content ) || empty( $content ) ) {
+        return $content; 
+    }
     
-    // Define BunnyCDN Hostname and upload path
+    // CRITICAL: The ACTUAL BunnyCDN Hostname you are using.
     $cdn_hostname = 'https://possible-this-media.b-cdn.net'; 
     $origin_uploads_path = '/wp-content/uploads/';
     
@@ -21,10 +28,11 @@ function possible_rewrite_cdn_urls( $content ) {
 }
 
 // Hook into all major content and asset output filters
-add_filter( 'the_content', 'possible_rewrite_cdn_urls' );
-add_filter( 'post_thumbnail_html', 'possible_rewrite_cdn_urls' );
-add_filter( 'widget_text', 'possible_rewrite_cdn_urls' ); 
-add_filter( 'final_output', 'possible_rewrite_cdn_urls' );
-add_filter( 'rank_math/json_ld', 'possible_rewrite_cdn_urls', 10 );
-add_filter( 'rank_math/head', 'possible_rewrite_cdn_urls', 10 );
+add_filter( 'the_content', 'possible_rewrite_cdn_urls', 10 );
+add_filter( 'post_thumbnail_html', 'possible_rewrite_cdn_urls', 10 );
+add_filter( 'widget_text', 'possible_rewrite_cdn_urls', 10 ); 
+add_filter( 'final_output', 'possible_rewrite_cdn_urls', 10 );
+
+// Rank Math Hook: Only run on the JSON-LD filter if we trust it returns a string.
+add_filter( 'rank_math/json_ld', 'possible_rewrite_cdn_urls', 10 ); 
 ?>
