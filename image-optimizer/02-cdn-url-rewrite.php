@@ -6,8 +6,8 @@
  */
 function possible_rewrite_cdn_urls( $content ) {
     
-    // CRITICAL: REPLACE 'https://your.b-cdn.net' with your ACTUAL BunnyCDN Hostname
-    $cdn_hostname = 'https://your.b-cdn.net'; 
+    // Define BunnyCDN Hostname and upload path
+    $cdn_hostname = 'https://possible-this-media.b-cdn.net'; 
     $origin_uploads_path = '/wp-content/uploads/';
     
     // Define the full origin and CDN prefixes
@@ -25,4 +25,6 @@ add_filter( 'the_content', 'possible_rewrite_cdn_urls' );
 add_filter( 'post_thumbnail_html', 'possible_rewrite_cdn_urls' );
 add_filter( 'widget_text', 'possible_rewrite_cdn_urls' ); 
 add_filter( 'final_output', 'possible_rewrite_cdn_urls' );
+add_filter( 'rank_math/json_ld', 'possible_rewrite_cdn_urls', 10 );
+add_filter( 'rank_math/head', 'possible_rewrite_cdn_urls', 10 );
 ?>
