@@ -2,10 +2,11 @@
 /**
  * possible_create_webp_on_upload()
  * MANDATE: Automated, cost-free WebP generation on the Hostinger VPS (Origin).
- * Status: imagewebp() confirmed functional.
+ * Status: Now only processing JPG/JPEG to prevent file bloat on PNG assets.
  * PHP 8.4 Compatible.
  */
 function possible_create_webp_on_upload( $metadata ) {
+    
     // Safety check: Function exists and file path is set
     if ( ! function_exists( 'imagewebp' ) || ! isset( $metadata['file'] ) ) {
         return $metadata;
@@ -20,34 +21,26 @@ function possible_create_webp_on_upload( $metadata ) {
     
     $image = null;
 
-    // Create image resource based on file type
+    // --- MODIFIED: ONLY TARGET JPG/JPEG ---
     switch ( $extension ) {
         case 'jpg':
         case 'jpeg':
             $image = imagecreatefromjpeg( $full_path );
             break;
-        case 'png':
-            $image = imagecreatefrompng( $full_path );
-            if ( $image ) {
-                // Critical for PNG transparency preservation
-                imagepalettetotruecolor( $image );
-                imagealphablending( $image, false );
-                imagesavealpha( $image, true );
-            }
-            break;
         default:
+            // PNG, GIF, and other formats are now bypassed entirely.
             return $metadata;
     }
 
-    // Save the resource as a WebP file (Quality 85 provides a good balance)
+    // Save the resource as a WebP file (Quality 75 for cost-governed compression)
     if ( $image ) {
-        imagewebp( $image, $webp_path, 85 );
+        imagewebp( $image, $webp_path, 75 ); 
         imagedestroy( $image );
     }
 
     return $metadata;
 }
 
-// Hook into WordPress's file generation process (priority 20 ensures thumbnails are generated first)
+// Hook into WordPress's file generation process (priority 20)
 add_filter( 'wp_generate_attachment_metadata', 'possible_create_webp_on_upload', 20 );
 ?>
