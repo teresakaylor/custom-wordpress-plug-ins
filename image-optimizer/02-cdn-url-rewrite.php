@@ -34,5 +34,5 @@ add_filter( 'widget_text', 'possible_rewrite_cdn_urls', 10 );
 add_filter( 'final_output', 'possible_rewrite_cdn_urls', 10 );
 
 // Rank Math Hook: Only run on the JSON-LD filter if we trust it returns a string.
-add_filter( 'rank_math/json_ld', 'possible_rewrite_cdn_urls', 10 ); 
+add_filter( 'rank_math/json_ld', 'possible_rewrite_cdn_urls', 9999 ); 
 ?>
